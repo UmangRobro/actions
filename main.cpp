@@ -3,6 +3,7 @@
 
 int main()
 {
+    std::cout<<"Log added for memory";
     boost::filesystem::path p("/media/umang/Robro PD/");
 
     uintmax_t freeSpace = boost::filesystem::space(p).free;
