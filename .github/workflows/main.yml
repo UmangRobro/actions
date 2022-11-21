@@ -1,0 +1,55 @@
+name: Check For Changelog.md and CMakeLists.txt file modification.
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check if C++ file modified
+        uses: tj-actions/verify-changed-files@v12.0
+        id: cpp-file-changed
+        with:
+          files: |
+            **/*.cpp
+            **/*.hpp
+            **/*.h
+            **/*.c
+      - name: Check if Python file modified
+        uses: tj-actions/verify-changed-files@v12.0
+        id: py-file-changed
+        with:
+          files: |
+            **/*.py
+      - name: Check if CMakeLists file modified
+        uses: tj-actions/verify-changed-files@v12.0
+        id: cmake-file-changed
+        with:
+          files: |
+            CMakeLists.txt
+      - name: Check if Setup.py file modified
+        uses: tj-actions/verify-changed-files@v12.0
+        id: setup-file-changed
+        with:
+          files: |
+            setup.py
+      - name: Check if C++ file modified
+        uses: tj-actions/verify-changed-files@v12.0
+        id: changelog-file-changed
+        with:
+          files: |
+            CHANGELOG.md
+      - name: Proper C++ file Modified
+        if: steps.cpp-file-changed.outputs.files_changed == 'true' && steps.cmake-file-changed.outputs.files_changed == 'true' && steps.changelog-file-changed.outputs.files_changed == 'true'
+        run: |
+          echo "Changed files are okay"
+      - name: Proper PY file Modified
+        if: steps.py-file-changed.outputs.files_changed == 'true' && steps.setup-file-changed.outputs.files_changed == 'true' && steps.changelog-file-changed.outputs.files_changed == 'true'
+        run: |
+          echo "Changed files are okay"
