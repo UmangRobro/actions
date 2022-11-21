@@ -21,6 +21,10 @@ jobs:
             **/*.hpp
             **/*.h
             **/*.c
+      - name: Proper C++ file Modified
+        if: steps.cpp-file-changed.outputs.files_changed == 'true'
+        run: |
+          echo "Changed files are okay"
       - name: Check if Python file modified
         uses: tj-actions/verify-changed-files@v12.0
         id: py-file-changed
@@ -45,7 +49,3 @@ jobs:
         with:
           files: |
             CHANGELOG.md
-      - name: Proper C++ file Modified
-        if: steps.cpp-file-changed.outputs.files_changed == 'true'
-        run: |
-          echo "Changed files are okay"
