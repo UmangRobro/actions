@@ -46,10 +46,6 @@ jobs:
           files: |
             CHANGELOG.md
       - name: Proper C++ file Modified
-        if: steps.cpp-file-changed.outputs.files_changed == 'true' && steps.cmake-file-changed.outputs.files_changed == 'true' && steps.changelog-file-changed.outputs.files_changed == 'true'
-        run: |
-          echo "Changed files are okay"
-      - name: Proper PY file Modified
-        if: steps.py-file-changed.outputs.files_changed == 'true' && steps.setup-file-changed.outputs.files_changed == 'true' && steps.changelog-file-changed.outputs.files_changed == 'true'
+        if: steps.cpp-file-changed.outputs.files_changed == 'true'
         run: |
           echo "Changed files are okay"
