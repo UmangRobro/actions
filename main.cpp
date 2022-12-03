@@ -4,7 +4,7 @@
 int main()
 {
     boost::filesystem::path p("/media/umang/Robro PD/");
-
+    boost::filesystem::path p("/media/umang/Robro PD/");
     uintmax_t freeSpace = boost::filesystem::space(p).free;
     std::cout << freeSpace << " Free Bytes" << std::endl;
     std::cout << (float)freeSpace / (1 << 20) << " Free MB" << std::endl;
